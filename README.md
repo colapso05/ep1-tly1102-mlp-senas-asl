@@ -184,10 +184,15 @@ tamaño de mano, grosor de trazo y brillo del fondo.
 
 ### 5.4 Análisis de los píxeles
 
-- La mayoría de los píxeles de cada imagen son fondo: **más del 60% de las 784 entradas que
-  recibe el modelo no contienen información de la seña**, sino ruido del fondo.
-- La imagen promedio global muestra un fondo con brillo no uniforme: la cámara aportó
-  información sistemática que el modelo también aprende.
+- **El fondo no es negro: es gris con brillo variable.** La intensidad media es 159 de 255
+  (0,62 en escala 0–1) y solo el **0,20%** de los píxeles vale exactamente 0. Es decir, el
+  **99,8% del cuadro entra al modelo como entrada activa**.
+- **La mano ocupa apenas ~20% del área** (píxeles más oscuros que 120) y está concentrada en
+  el centro: el centro promedia 148 de intensidad contra 158 del borde. Dicho de otro modo,
+  **alrededor de cuatro quintas partes de las 784 entradas que recibe el MLP son fondo**, y el
+  modelo no sabe de antemano que puede ignorarlas.
+- Las esquinas varían de brillo entre imágenes (desviación de 30,6), o sea que **cada sesión de
+  captura tiene su propio fondo**, y eso el modelo también lo aprende.
 
 → Figura: `images/04_histograma_intensidad.png`
 
@@ -413,8 +418,10 @@ sugeriría: hay clases con hasta un 31,7% de error.
    más confundidos coinciden con los de mayor similitud entre imágenes promedio.
 2. **Variabilidad intra-clase.** La misma letra aparece con distinta posición y tamaño de mano,
    y el modelo no generaliza bien esas variaciones.
-3. **Ruido del fondo.** Más del 60% de las entradas son fondo, y el MLP les asigna pesos como
-   si fueran señal. Una foto de webcam con un fondo distinto degradaría el desempeño.
+3. **Fondo dominante y variable.** La mano ocupa solo ~20% del cuadro; el ~80% restante es
+   fondo gris cuyo brillo cambia entre sesiones de captura (desviación de 30,6 entre imágenes).
+   El MLP le asigna pesos como si fuera señal. Una foto de webcam con un fondo distinto
+   degradaría el desempeño.
 4. **Sobreajuste a la sesión de captura.** La brecha de 10,58 puntos muestra que el modelo
    aprendió particularidades del archivo de entrenamiento, no solo el concepto de cada seña.
 
