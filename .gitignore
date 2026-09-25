@@ -1,0 +1,22 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Material de trabajo interno: NO forma parte de la entrega
+# (guion de la defensa, borradores, scripts de construccion del notebook)
+_interno/
+
+# Nota: los dataset (data/*.csv) SÍ se versionan a propósito:
+# la pauta exige que el proyecto sea reproducible sin modificaciones adicionales.
+# Son ~105 MB en total. Si el repositorio se hace público y se quiere aligerar,
+# usar Git LFS o subir solo una muestra.

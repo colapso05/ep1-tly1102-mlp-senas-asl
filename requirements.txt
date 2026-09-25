@@ -1,0 +1,17 @@
+# Dependencias del proyecto EP1 TLY1102
+# Versiones verificadas en la ejecución del 24/09/2026 (Python 3.11.16)
+numpy==2.4.6
+pandas==3.0.6
+scikit-learn==1.9.1
+matplotlib==3.11.2
+Pillow==12.3.0
+joblib==1.6.0
+
+# Para ejecutar/inspeccionar el notebook
+jupyter
+nbformat
+nbconvert
+ipykernel
+
+# Para generar la presentación
+python-pptx==1.0.2
